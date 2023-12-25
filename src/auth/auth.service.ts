@@ -27,8 +27,11 @@ export class AuthService {
   public async signUp({ email, password, nickname, username }: CreateUserDto) {
     const emailExists = await this.dbUserService.findOne({ email });
     const userExists = await this.dbUserService.findOne({ username });
-    if (userExists || emailExists) {
-      throw new BadRequestException('User email or name exists');
+    if (userExists) {
+      throw new BadRequestException('User name exists');
+    }
+    if (emailExists) {
+      throw new BadRequestException('User email exists');
     }
 
     const hash = await this.hashData(password);
