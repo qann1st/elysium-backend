@@ -11,7 +11,6 @@ import { CreateUserDto } from './dto/createUser.dto';
 import { RequestFriendDto } from './dto/requestFriend.dto';
 import { User, UserDocument } from './user.schema';
 import { AcceptDeclineFriendDto } from './dto/acceptDeclineFriend.dto';
-import { ObjectId } from 'mongoose';
 
 @Injectable()
 export class UserService {
