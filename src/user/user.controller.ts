@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Patch,
+  Post,
   Put,
   UseGuards,
   ValidationPipe,
@@ -47,7 +48,7 @@ export class UserController {
     });
   }
 
-  @Put('/addToFriend')
+  @Post('/addToFriend')
   requestFriend(
     @Body(ValidationPipe) addToFriend: AddToFriendDto,
     @CurrentUser() user: User,

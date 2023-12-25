@@ -11,6 +11,7 @@ import { CreateUserDto } from './dto/createUser.dto';
 import { RequestFriendDto } from './dto/requestFriend.dto';
 import { User, UserDocument } from './user.schema';
 import { AcceptDeclineFriendDto } from './dto/acceptDeclineFriend.dto';
+import { UpdateAvatarDto, UpdateNicknameDto } from './dto/updateUser.dto';
 
 @Injectable()
 export class UserService {
@@ -18,12 +19,10 @@ export class UserService {
     @InjectModel(User.name) private userService: Model<UserDocument>,
   ) {}
 
-  public async createUser({
-    username,
-    nickname,
-    email,
-    password,
-  }: CreateUserDto): Promise<UserDocument> {
+  public async createUser(
+    @Body(ValidationPipe)
+    { username, nickname, email, password }: CreateUserDto,
+  ): Promise<UserDocument> {
     const newUser = await this.userService.create({
       username,
       nickname,
@@ -33,13 +32,9 @@ export class UserService {
     return newUser;
   }
 
-  public async updateNickname({
-    id,
-    nickname,
-  }: {
-    id: string;
-    nickname: string;
-  }): Promise<UserDocument> {
+  public async updateNickname(
+    @Body(ValidationPipe) { id, nickname }: UpdateNicknameDto,
+  ): Promise<UserDocument> {
     const updatedUser = await this.userService.findByIdAndUpdate(id, {
       nickname,
     });
@@ -49,10 +44,7 @@ export class UserService {
   public async updateAvatar({
     id,
     avatar,
-  }: {
-    id: string;
-    avatar: string;
-  }): Promise<UserDocument> {
+  }: UpdateAvatarDto): Promise<UserDocument> {
     const updatedUser = await this.userService.findByIdAndUpdate(id, {
       avatar,
     });

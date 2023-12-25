@@ -14,8 +14,10 @@ import { User, UserSchema } from 'src/user/user.schema';
   imports: [
     JwtModule.register({}),
     PassportModule,
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-    MongooseModule.forFeature([{ name: Auth.name, schema: AuthSchema }]),
+    MongooseModule.forFeature([
+      { name: User.name, schema: UserSchema },
+      { name: Auth.name, schema: AuthSchema },
+    ]),
     UserModule,
   ],
   controllers: [AuthController],
