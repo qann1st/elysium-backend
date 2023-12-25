@@ -29,7 +29,9 @@ export class User {
   @Prop({ default: Date.now() })
   createdAccount: Date;
   @Prop({ default: [] })
-  friends: User[];
+  friends: string[];
+  @Prop({ default: [] })
+  friendsRequests: string[];
   @Prop({ default: false })
   isOnline: boolean;
 }

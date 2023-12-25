@@ -1,9 +1,7 @@
-export class updateNicknameDto {
-  id: string;
+export class UpdateNicknameDto {
   nickname: string;
 }
 
-export class updateAvatarDto {
-  id: string;
+export class UpdateAvatarDto {
   avatar: string;
 }
