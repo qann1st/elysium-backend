@@ -34,6 +34,8 @@ export class User {
   friendsRequests: string[];
   @Prop({ default: false })
   isOnline: boolean;
+  @Prop()
+  socketId: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

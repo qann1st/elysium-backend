@@ -3,6 +3,7 @@ import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { access, mkdir, writeFile } from 'fs/promises';
 import { join } from 'path';
 import * as sharp from 'sharp';
@@ -74,8 +75,12 @@ export class FileService {
       );
       return newFiles;
     } catch (err) {
-      console.log(err);
       throw new BadRequestException('Incorrect data format');
     }
+  }
+
+  async getFile(path: string, res: Response) {
+    const imagePath = join(__dirname, '..', '..', '/static/default', path);
+    res.sendFile(imagePath);
   }
 }

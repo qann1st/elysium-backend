@@ -95,4 +95,38 @@ export class UserService {
     });
     return editedUser;
   }
+
+  public async rejectRequest(
+    @Body(ValidationPipe) { _id }: AcceptDeclineFriendDto,
+    user: User,
+  ) {
+    const editedUser = await this.userService.findByIdAndUpdate(
+      user._id,
+      {
+        $pull: { friendsRequests: _id },
+      },
+      { new: true },
+    );
+    await this.userService.findByIdAndUpdate(_id, {
+      $pull: { friendsRequests: user._id.toString() },
+    });
+    return editedUser;
+  }
+
+  public async removeFriend(
+    @Body(ValidationPipe) { _id }: AcceptDeclineFriendDto,
+    user: User,
+  ) {
+    const editedUser = await this.userService.findByIdAndUpdate(
+      user._id,
+      {
+        $pull: { friends: _id },
+      },
+      { new: true },
+    );
+    await this.userService.findByIdAndUpdate(_id, {
+      $pull: { friends: user._id.toString() },
+    });
+    return editedUser;
+  }
 }
