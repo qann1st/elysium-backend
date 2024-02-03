@@ -33,19 +33,19 @@ export class UserService {
   }
 
   public async updateNickname(
-    @Body(ValidationPipe) { id, nickname }: UpdateNicknameDto,
+    @Body(ValidationPipe) { _id, nickname }: UpdateNicknameDto,
   ): Promise<UserDocument> {
-    const updatedUser = await this.userService.findByIdAndUpdate(id, {
+    const updatedUser = await this.userService.findByIdAndUpdate(_id, {
       nickname,
     });
     return updatedUser;
   }
 
   public async updateAvatar({
-    id,
+    _id,
     avatar,
   }: UpdateAvatarDto): Promise<UserDocument> {
-    const updatedUser = await this.userService.findByIdAndUpdate(id, {
+    const updatedUser = await this.userService.findByIdAndUpdate(_id, {
       avatar,
     });
     return updatedUser;

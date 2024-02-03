@@ -14,7 +14,9 @@ import { AuthService } from './auth.service';
 import { JwtRefreshPayload } from './strategies/refresh-token.strategy';
 import { RefreshTokenGuard } from './guards/refresh-token.guard';
 import { CurrentUser } from './decorators/current-user.decorator';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('auth')
 @Controller('auth/')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

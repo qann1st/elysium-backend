@@ -1,9 +1,17 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class UpdateNicknameDto {
-  id: string;
+  @ApiProperty()
+  _id: string;
+
+  @ApiProperty()
   nickname: string;
 }
 
 export class UpdateAvatarDto {
-  id: string;
+  @ApiProperty()
+  _id: string;
+
+  @ApiProperty()
   avatar: string;
 }

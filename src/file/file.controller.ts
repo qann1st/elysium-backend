@@ -9,10 +9,12 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { Express } from 'multer';
 import { FileService } from './file.service';
 
+@ApiTags('files')
 @Controller('file')
 export class FileController {
   constructor(private fileService: FileService) {}

@@ -16,7 +16,9 @@ import { AddToFriendDto } from './dto/addToFriend.dto';
 import { UpdateAvatarDto, UpdateNicknameDto } from './dto/updateUser.dto';
 import { User } from './user.schema';
 import { UserService } from './user.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('user')
 @UseGuards(AccessTokenGuard)
 @Controller('user')
 export class UserController {
@@ -33,7 +35,7 @@ export class UserController {
     @CurrentUser() user: User,
   ) {
     return this.userService.updateNickname({
-      id: user._id,
+      _id: user._id,
       nickname: updateNicknameDto.nickname,
     });
   }
@@ -44,7 +46,7 @@ export class UserController {
     @CurrentUser() user: User,
   ) {
     return this.userService.updateAvatar({
-      id: user._id,
+      _id: user._id,
       avatar: updateAvatarDto.avatar,
     });
   }
