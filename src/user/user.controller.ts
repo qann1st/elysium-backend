@@ -1,19 +1,21 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Patch,
+  Post,
   Put,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { AccessTokenGuard } from 'src/auth/guards/access-token.guard';
+import { AcceptDeclineFriendDto } from './dto/acceptDeclineFriend.dto';
+import { AddToFriendDto } from './dto/addToFriend.dto';
 import { UpdateAvatarDto, UpdateNicknameDto } from './dto/updateUser.dto';
 import { User } from './user.schema';
 import { UserService } from './user.service';
-import { AddToFriendDto } from './dto/addToFriend.dto';
-import { AcceptDeclineFriendDto } from './dto/acceptDeclineFriend.dto';
 
 @UseGuards(AccessTokenGuard)
 @Controller('user')
@@ -47,7 +49,7 @@ export class UserController {
     });
   }
 
-  @Put('/addToFriend')
+  @Post('/addToFriend')
   requestFriend(
     @Body(ValidationPipe) addToFriend: AddToFriendDto,
     @CurrentUser() user: User,
@@ -61,5 +63,21 @@ export class UserController {
     @CurrentUser() user: User,
   ) {
     return this.userService.acceptRequest(acceptFriend, user);
+  }
+
+  @Delete('/rejectRequest')
+  rejectRequest(
+    @Body(ValidationPipe) acceptFriend: AcceptDeclineFriendDto,
+    @CurrentUser() user: User,
+  ) {
+    return this.userService.rejectRequest(acceptFriend, user);
+  }
+
+  @Delete('/removeFriend')
+  removeFriend(
+    @Body(ValidationPipe) acceptFriend: AcceptDeclineFriendDto,
+    @CurrentUser() user: User,
+  ) {
+    return this.userService.removeFriend(acceptFriend, user);
   }
 }
